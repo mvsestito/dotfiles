@@ -163,7 +163,7 @@ let g:lexical#spelllang=['en_us',]
 let g:lexical#thesaurus=['~/.vim/plugins/moby/words.txt',]
 let g:lexical#dictionary=['/usr/share/dict/words',]
 let g:lexical#spellfile=['~/.vim/spell/en.utf-8.add',]
-nmap ll :setlocal spell!<CR>
+"nmap ll :setlocal spell!<CR>
 
 " ============================================================================
 " https://github.com/reedes/vim-wordy
