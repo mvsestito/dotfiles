@@ -1,0 +1,15 @@
+docker
+dropbox
+lastpass
+iterm2
+openVPN
+private internet access
+skype
+slack
+spotify
+steam
+the unarchiver
+transmission
+typora
+vlc
+xld

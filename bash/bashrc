@@ -1,0 +1,97 @@
+#.bashrc
+
+#-------------------------------------------------------------------------------
+# PATH
+#-------------------------------------------------------------------------------
+export PATH=/usr/local/bin:$PATH
+#export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:$PATH
+
+#-------------------------------------------------------------------------------
+# Shell options
+#-------------------------------------------------------------------------------
+# Enable autocomplete
+set autolist
+# Disable terminal audio-visual bell
+#set bell-style none
+# Store multi-line commands in a single history entry
+shopt -s cmdhist
+# Enable extended pattern matching operators
+shopt -s extglob
+# Apped history to existing files instead of overwriting
+shopt -s histappend
+# Case-insensitive globbing
+shopt -s nocaseglob
+# Autocorrect typos in path names when using `cd`
+shopt -s cdspell
+# Enable programmable completion
+shopt -s progcomp
+
+#-------------------------------------------------------------------------------
+# Aliases
+#-------------------------------------------------------------------------------
+# neovim
+alias vim="/usr/local/bin/nvim"
+
+# Directory listing
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# Colorize
+alias diff='colordiff'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+#-------------------------------------------------------------------------------
+# Environment
+#-------------------------------------------------------------------------------
+# Golang
+export GOPATH="$HOME/go"
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:/usr/local/sbin:/usr/local/bin
+
+# git
+export GIT_TERMINAL_PROMPT=1
+
+# History
+# Ignore duplicate entries or entries starting with spaces in history
+export HISTCONTROL=ignoreboth
+export HISTSIZE=100000
+export HISTFILESIZE="${HISTSIZE}"
+export HISTIGNORE='&:ls:exit'
+
+# general
+export EMAIL='Michael Sestito <mvsestito@gmail.com>'
+export EDITOR=vim
+export VISUAL=vim
+export GIT_EDITOR=vim
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+# Programming and development
+# Highlight section titles in man pages
+export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
+# Don't clear the screen after quitting a man page
+export MANPAGER='less -X'
+
+#-------------------------------------------------------------------------------
+# FUNCTIONS
+#-------------------------------------------------------------------------------
+function godir() {
+    basedir="$GOPATH/src"
+    # If not argument is provided, go the $basedir
+    # Otherwise, use the argument as a regex to jump to the first matching path
+    if [ -z $1 ]; then
+	    pushd "${basedir}"
+    else
+        newdir=$(find "$GOPATH/src" -type d -path "*${1}*" -print -quit)
+        pushd "${newdir}"
+    fi
+}
+
+#-------------------------------------------------------------------------------
+# SSH
+#-------------------------------------------------------------------------------
+if ! pgrep -x "ssh-agent" > /dev/null
+then
+    echo "Starting ssh-agent..."
+    eval "$(ssh-agent -s)"
+fi

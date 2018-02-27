@@ -1,0 +1,27 @@
+[user]
+    name = Michael Sestito
+    email = mvsestito@gmail.com
+[color]
+    ui = true
+[color "branch"]
+    current = yellow bold
+    local = green bold
+    remote = cyan bold
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+[color "status"]
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
+[branch]
+    autosetupmerge = true
+    autosetuprebase = always
+[push]
+    default = simple
+[url "git@github.com:mvsestito"]
+    insteadof = https://github.com/mvsestito
+
