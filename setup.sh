@@ -84,7 +84,7 @@ mkdir -p ~/.local/share/nvim/site/autoload
 
 ln -sf ~/bin/nvim ~/.vim
 ln -sf ~/bin/nvim/init.vim ~/.vim/.vimrc
-ln -sf ~/bin/nvim/colors/color.vim ~/.vim/colors/color.vim
+ln -sf ~/bin/nvim/colors/molokai.vim ~/.vim/colors/molokai.vim
 ln -sf ~/bin/nvim/autoload/plug.vim ~/.vim/autoload/plug.vim
 
 # symlinks for local neovim
