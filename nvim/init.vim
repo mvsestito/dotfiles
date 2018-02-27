@@ -68,9 +68,6 @@ Plug 'tclh123/vim-thrift'                      " Thrift syntax highlighting
 Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
 Plug 'zchee/deoplete-jedi'                     " Go auto completion
 
-" Colorschemes
-Plug 'NLKNguyen/papercolor-theme'
-
 call plug#end()
 
 "----------------------------------------------
