@@ -95,3 +95,5 @@ then
     echo "Starting ssh-agent..."
     eval "$(ssh-agent -s)"
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
