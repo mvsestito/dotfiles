@@ -4,11 +4,12 @@
 " https://github.com/junegunn/vim-plug
 "----------------------------------------------
 "
-if has('nvim')
-    call plug#begin('~/.local/share/nvim/plugged')
-else
-    call plug#begin('~/.vim/plugged')
-endif
+call plug#begin('~/.local/share/nvim/plugged')
+"if has('nvim')
+"    call plug#begin('~/.local/share/nvim/plugged')
+"else
+"    call plug#begin('~/.vim/plugged')
+"endif
 
 " Dependencies
 Plug 'Shougo/neocomplcache'        " Depenency for Shougo/neosnippet
@@ -39,6 +40,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
+Plug 'tomasr/molokai'
 
 " Vim only plugins
 if !has('nvim')
@@ -79,7 +81,7 @@ set autoread                      " reload file if the file changes on the disk
 set autowrite                     " write when switching buffers
 set autowriteall                  " write on :quit
 set clipboard=unnamedplus
-set colorcolumn=81                " highlight the 80th column as an indicator
+"set colorcolumn=81                " highlight the 80th column as an indicator
 set completeopt-=preview          " remove the horrendous preview window
 set cursorline                    " highlight the current line for the cursor
 set encoding=utf-8
@@ -92,7 +94,7 @@ set nowrap
 set noerrorbells                  " No bells!
 set novisualbell                  " I said, no bells!
 set number                        " show number ruler
-set relativenumber                " show relative numbers in the ruler
+"set relativenumber                " show relative numbers in the ruler
 set ruler
 set formatoptions=tcqronj         " set vims text formatting options
 set softtabstop=2
@@ -115,8 +117,14 @@ if has('mouse')
     set mouse=a
 endif
 
+" COLOR
 " Allow vim to set a custom font or color for a word
 syntax enable
+"set t_Co=256
+"set background=dark
+"let g:molokai_original = 1
+"let g:rehash256 = 1
+colorscheme industry
 
 " Set the leader button
 let mapleader = ','
@@ -130,23 +138,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Center the screen quickly
 nnoremap <space> zz
 
-"----------------------------------------------
-" Colors
-"----------------------------------------------
-set background=dark
-colorscheme PaperColor
-
-" Override the search highlight color with a combination that is easier to
-" read. The default PaperColor is dark green backgroun with black foreground.
-"
-" Reference:
-" - http://vim.wikia.com/wiki/Xterm256_color_names_for_console_Vim
-highlight Search guibg=DeepPink4 guifg=White ctermbg=53 ctermfg=White
-
-" Toggle background with <leader>bg
-map <leader>bg :let &background = (&background == "dark"? "light" : "dark")<cr>
-
-"----------------------------------------------
+"-----------"----------------------------------------------
 " Searching
 "----------------------------------------------
 set incsearch                     " move to match as you type the search query
