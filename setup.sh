@@ -77,6 +77,8 @@ echo "Configuring vim dotfiles..."
 [ -L ~/.config/nvim/init.vim ] && rm ~/.config/nvim/init.vim
 # check if real file
 [ -f ~/.config/nvim/init.vim ] && echo "~/.config/nvim/init.vim exists. Delete and re-run setup." && exit
+# check for plugged dir
+[ -d ~/.config/nvim/plugged ] && echo "~/.config/nvim/plugged exists. Delete and re-run setup." && exit
 
 mkdir -p ~/.vim/autoload
 mkdir -p ~/.vim/colors
