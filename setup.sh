@@ -12,20 +12,24 @@ echo "Starting setup..."
 source scripts/functions.sh
 
 # install homebrew
-echo "Installing Homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-exit_on_error "could not install homebrew"
+# check if already installed
+echo "Checking for existing Homebrew installation..."
+which brew &> /dev/null
+if [[ 0"$?" != 0"0" ]]; then
+    echo "Installing Homebrew..."
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    exit_on_error "could not install homebrew"
+else
+    echo "Existing Homebrew found"
+fi
 
 # setup homebrew packages
-which brew &> /dev/null
-exit_on_error "brew command not found"
-
 echo "Running brew update..."
 brew update
 exit_on_error "brew update failed"
 
 echo "Installing required packages using brew bundle..."
-brew bundle --filepath=../Brewfile
+brew bundle
 exit_on_error "brew bundle failed"
 
 echo "Brew packages successfully installed"
@@ -67,8 +71,8 @@ echo "Configuring vim dotfiles..."
 # check for existing sym link and rm it if exist
 [ -L ~/.vim ] && rm ~/.vim
 [ -d ~/.vim ] && echo "~/.vim exists. Delete and re-run setup." && exit
-[ -L ~/.local/share/nvim/site/autoload] && rm ~/.local/share/nvim/site/autoload
-[ -d ~/.local/share/nvim/site/autoload] && echo "~/.local/share/nvim/site/autoload exists. Delete and re-run setup." && exit
+[ -L ~/.local/share/nvim/site/autoload ] && rm ~/.local/share/nvim/site/autoload
+[ -d ~/.local/share/nvim/site/autoload ] && echo "~/.local/share/nvim/site/autoload exists. Delete and re-run setup." && exit
 mkdir -p ~/.vim/autoload && mkdir -p ~/.local/share/nvim/site/autoload
 ln -sf ~/bin/nvim ~/.vim
 ln -sf ~/bin/nvim/init.vim ~/.vimrc
