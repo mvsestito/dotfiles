@@ -70,16 +70,26 @@ ln -sf ~/bin/git/gitconfig ~/.gitconfig
 echo "Configuring vim dotfiles..."
 # check for existing sym link and rm it if exist
 [ -L ~/.vim ] && rm ~/.vim
+# check if real dir
 [ -d ~/.vim ] && echo "~/.vim exists. Delete and re-run setup." && exit
 [ -L ~/.local/share/nvim/site/autoload ] && rm ~/.local/share/nvim/site/autoload
 [ -d ~/.local/share/nvim/site/autoload ] && echo "~/.local/share/nvim/site/autoload exists. Delete and re-run setup." && exit
-mkdir -p ~/.vim/autoload && mkdir -p ~/.local/share/nvim/site/autoload
+[ -L ~/.config/nvim/init.vim ] && rm ~/.config/nvim/init.vim
+# check if real file
+[ -f ~/.config/nvim/init.vim ] && echo "~/.config/nvim/init.vim exists. Delete and re-run setup." && exit
+
+mkdir -p ~/.vim/autoload
+mkdir -p ~/.vim/colors
+mkdir -p ~/.local/share/nvim/site/autoload
+
 ln -sf ~/bin/nvim ~/.vim
-ln -sf ~/bin/nvim/init.vim ~/.vimrc
+ln -sf ~/bin/nvim/init.vim ~/.vim/.vimrc
+ln -sf ~/bin/nvim/colors/color.vim ~/.vim/colors/color.vim
 ln -sf ~/bin/nvim/autoload/plug.vim ~/.vim/autoload/plug.vim
-# symlinks for neovim
+
+# symlinks for local neovim
 ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
-ln -sf ~/.vim/init.vim ~/.config/nvim/init.vim
+ln -sf ~/.vim/.vimrc ~/.config/nvim/init.vim
 
 #### Install all vim plugins
 echo "Installing vim plugins"
