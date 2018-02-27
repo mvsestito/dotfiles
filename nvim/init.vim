@@ -4,12 +4,12 @@
 " https://github.com/junegunn/vim-plug
 "----------------------------------------------
 "
-call plug#begin('~/.local/share/nvim/plugged')
-"if has('nvim')
-"    call plug#begin('~/.local/share/nvim/plugged')
-"else
-"    call plug#begin('~/.vim/plugged')
-"endif
+"
+if has('nvim')
+    call plug#begin('~/.local/share/nvim/plugged')
+else
+    call plug#begin('~/.vim/plugged')
+endif
 
 " Dependencies
 Plug 'Shougo/neocomplcache'        " Depenency for Shougo/neosnippet
@@ -108,8 +108,8 @@ if has('nvim')
     " install the neovim package for these binaries separately like this for
     " example:
     " pip3.6 install -U neovim
-    let g:python_host_prog = '/usr/bin/python2'
-    let g:python3_host_prog = '/usr/bin/python3'
+    let g:python_host_prog = '/usr/local/bin/python2.7'
+    let g:python3_host_prog = '/usr/local/bin/python3'
 endif
 
 " Enable mouse if possible
