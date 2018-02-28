@@ -75,6 +75,7 @@ call plug#end()
 "----------------------------------------------
 " General settings
 "----------------------------------------------
+set foldmethod=syntax             " fold on statements and functions
 set autoindent                    " take indent for new line from previous line
 set smartindent                   " enable smart indentation
 set autoread                      " reload file if the file changes on the disk
@@ -124,7 +125,7 @@ syntax enable
 "set background=dark
 "let g:molokai_original = 1
 "let g:rehash256 = 1
-colorscheme industry
+colorscheme molokai
 
 " Set the leader button
 let mapleader = ','
