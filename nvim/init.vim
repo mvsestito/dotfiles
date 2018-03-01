@@ -121,10 +121,10 @@ endif
 " COLOR
 " Allow vim to set a custom font or color for a word
 syntax enable
-"set t_Co=256
-"set background=dark
-"let g:molokai_original = 1
-"let g:rehash256 = 1
+set t_Co=256
+set background=dark
+let g:molokai_original = 1
+let g:rehash256 = 1
 colorscheme molokai
 
 " Set the leader button
