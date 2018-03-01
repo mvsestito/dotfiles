@@ -17,5 +17,6 @@ brew "python3"
 brew "tmux"
 brew "tree"
 brew "wget"
+brew "youtube-dl"
 brew "wireshark", link: false
 cask "wireshark"
