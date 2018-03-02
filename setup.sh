@@ -94,8 +94,11 @@ ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
 ln -sf ~/.vim/.vimrc ~/.config/nvim/init.vim
 
 #### Install all vim plugins
-echo "Installing vim plugins"
-vim +PlugInstall +PlugClean +qall
+echo "Installing vim plugins..."
+vim -c "PlugInstall | PlugClean | qall"
+
+#### source colorscheme
+vim -c "source nvim/colors/molokai.vim | qall"
 
 echo "dotfiles setup complete!"
 
