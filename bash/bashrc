@@ -31,6 +31,7 @@ shopt -s progcomp
 #-------------------------------------------------------------------------------
 # neovim
 alias vim="/usr/local/bin/nvim"
+alias python="/usr/local/bin/python3"
 
 # Directory listing
 export LSCOLORS=GxFxCxDxBxegedabagaced
