@@ -41,7 +41,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 Plug 'tomasr/molokai'
-Plug 'FredKSchott/CoVim'
 
 " Vim only plugins
 if !has('nvim')
