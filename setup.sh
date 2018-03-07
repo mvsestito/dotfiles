@@ -100,5 +100,10 @@ vim -c "PlugInstall | PlugClean | qall"
 #### source colorscheme
 vim -c "source nvim/colors/molokai.vim | qall"
 
+#### install pip packages
+echo "Installing pip packages..."
+pip3 install -r requirements.txt
+
+
 echo "dotfiles setup complete!"
 
