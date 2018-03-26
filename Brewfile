@@ -19,5 +19,6 @@ brew "tree"
 brew "wget"
 brew "wireshark", link: false
 brew "youtube-dl"
+brew "dep"
 cask "ngrok"
 cask "wireshark"
