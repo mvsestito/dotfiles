@@ -20,5 +20,7 @@ brew "wget"
 brew "wireshark", link: false
 brew "youtube-dl"
 brew "dep"
+brew "pkgconfig"
+brew "zmq"
 cask "ngrok"
 cask "wireshark"
