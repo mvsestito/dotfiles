@@ -3,13 +3,19 @@ dropbox
 lastpass
 iterm2
 openVPN
-private internet access
+pia
 skype
 slack
 spotify
 steam
+battle.net
 the unarchiver
 transmission
 typora
 vlc
 xld
+gopro
+navicat
+spectacle
+sublime
+wireshark
