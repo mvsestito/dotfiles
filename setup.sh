@@ -91,14 +91,15 @@ ln -sf ~/bin/nvim/autoload/plug.vim ~/.vim/autoload/plug.vim
 
 # symlinks for local neovim
 ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
+mkdir -p ~/.config/nvim
 ln -sf ~/.vim/.vimrc ~/.config/nvim/init.vim
 
 #### Install all vim plugins
 echo "Installing vim plugins..."
-vim -c "PlugInstall | PlugClean | qall"
+nvim -c "PlugInstall | PlugClean | qall"
 
 #### source colorscheme
-vim -c "source nvim/colors/molokai.vim | qall"
+nvim -c "source ~/.vim/colors/molokai.vim | qall"
 
 #### install pip packages
 echo "Installing pip packages..."
