@@ -69,6 +69,7 @@ Plug 'rodjek/vim-puppet'                       " Puppet syntax highlighting
 Plug 'tclh123/vim-thrift'                      " Thrift syntax highlighting
 Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
 Plug 'zchee/deoplete-jedi'                     " Go auto completion
+Plug 'derekwyatt/vim-scala' " scala syntax highlighting
 
 call plug#end()
 
