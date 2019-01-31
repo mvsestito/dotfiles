@@ -41,8 +41,8 @@ ln -sf ~/bin/bash/bashrc ~/.bashrc
 ln -sf ~/bin/bash/bash_profile ~/.bash_profile
 
 ## create ctags file
-echo "Creating .ctags file..."
-echo -e "--recurse=yes\n--exclude=.git\n--exclude=vendor/*\n--exclude=node_modules/*\n--exclude=db/*\n--exclude=log/*" > $HOME/.ctags
+echo "Linking ctags file..."
+ln -sf ~/bin/ctags/dotctags ~/.ctags
 
 ### ssh config
 echo "Configuring ssh dotfiles..."
