@@ -109,6 +109,9 @@ nvim -c "source ~/.vim/colors/molokai.vim | qall"
 echo "Installing pip packages..."
 pip3 install -r requirements.txt
 
+# need to install neovim for python2.7 for ctags
+pip2 install neovim
+
 
 echo "dotfiles setup complete!"
 
