@@ -41,6 +41,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 Plug 'tomasr/molokai'
+Plug 'craigemery/vim-autotag'
 
 " Vim only plugins
 if !has('nvim')
