@@ -99,13 +99,6 @@ ln -sf ~/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
 mkdir -p ~/.config/nvim
 ln -sf ~/.vim/.vimrc ~/.config/nvim/init.vim
 
-#### Install all vim plugins
-echo "Installing vim plugins..."
-nvim -c "PlugInstall | PlugClean | qall"
-
-#### source colorscheme
-nvim -c "source ~/.vim/colors/molokai.vim | qall"
-
 #### install pip packages
 echo "Installing pip packages..."
 pip3 install -r requirements.txt
@@ -113,6 +106,12 @@ pip3 install -r requirements.txt
 # need to install neovim for python2.7 for ctags
 pip2 install neovim
 
+#### Install all vim plugins
+echo "Installing vim plugins..."
+nvim -c "PlugInstall | PlugClean | qall"
+
+#### source colorscheme
+nvim -c "source ~/.vim/colors/molokai.vim | qall"
 
 echo "dotfiles setup complete!"
 
