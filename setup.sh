@@ -41,6 +41,7 @@ ln -sf ~/bin/bash/bashrc ~/.bashrc
 ln -sf ~/bin/bash/bash_profile ~/.bash_profile
 
 ## create ctags file
+# run "ctags -R ." on project directory root to build tags file
 echo "Linking ctags file..."
 ln -sf ~/bin/ctags/dotctags ~/.ctags
 
