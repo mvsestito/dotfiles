@@ -640,6 +640,14 @@ au FileType html set softtabstop=2
 au FileType html set tabstop=2
 
 "----------------------------------------------
+" Language: Java
+"----------------------------------------------
+au FileType java set expandtab
+au FileType java set shiftwidth=2
+au FileType java set softtabstop=2
+au FileType java set tabstop=2
+
+"----------------------------------------------
 " Language: JavaScript
 "----------------------------------------------
 au FileType javascript set expandtab
