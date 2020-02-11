@@ -3,6 +3,7 @@
 --exclude=vendor/*
 --exclude=node_modules/*
 --exclude=db/*
+--exclude=*.sql
 --exclude=target
 --exclude=.svn
 --exclude=.hg
@@ -19,3 +20,9 @@
 --exclude=*.txt
 --exclude=*.class
 --exclude=*.md
+--exclude=*.scss
+--exclude=*.xml
+--exclude=*.properties
+--exclude=*.dtd
+--exclude=*.conf
+--exclude=*.yml
