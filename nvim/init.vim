@@ -42,6 +42,8 @@ Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 Plug 'tomasr/molokai'
 Plug 'craigemery/vim-autotag'
+Plug 'universal-ctags/ctags'
+
 
 " Vim only plugins
 if !has('nvim')
@@ -71,6 +73,7 @@ Plug 'tclh123/vim-thrift'                      " Thrift syntax highlighting
 Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
 Plug 'zchee/deoplete-jedi'                     " Go auto completion
 Plug 'derekwyatt/vim-scala' " scala syntax highlighting
+Plug 'artur-shaik/vim-javacomplete2' " Java auto completion
 
 call plug#end()
 
@@ -106,7 +109,10 @@ set title                         " let vim set the terminal title
 set updatetime=100                " redraw the status bar often
 
 " ctags reverse recursive search for tag file
-set tags=tags;/
+set tags=.tags;/
+
+" Tag completion
+inoremap <c-x><c-]> <c-]>
 
 " neovim specific settings
 if has('nvim')
@@ -143,6 +149,12 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 " Center the screen quickly
 nnoremap <space> zz
+
+"-----------"----------------------------------------------
+" Autotags
+"----------------------------------------------
+let g:autotagTagsFile="tags"
+let g:autotagmaxTagsFileSize= 10000000 " in bytes
 
 "-----------"----------------------------------------------
 " Searching
@@ -263,6 +275,18 @@ function! Multiple_cursors_after()
     let b:deoplete_disable_auto_complete = 0
 endfunction
 
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = []
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#sources.java = ['jc', 'javacomplete2', 'file', 'buffer']
+
+"----------------------------------------------
+" Java Complete
+"----------------------------------------------
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+autocmd FileType java JCEnable
 "----------------------------------------------
 " Plugin: bling/vim-airline
 "----------------------------------------------
@@ -316,6 +340,17 @@ nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 
 " Disable the CtrlP mapping, since we want to use FZF instead for <c-p>.
 let g:ctrlp_map = ''
+
+"----------------------------------------------
+" Plugin: artur-shail/vim-javacomplete2
+" ---------------------------------------------
+"  Enable smart inserts for class imports
+nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+" Add all missing imports
+nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
+" Remove unused imports
+nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
+
 
 "----------------------------------------------
 " Plugin: easymotion/vim-easymotion
@@ -410,6 +445,13 @@ let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
 let g:neomake_warning_sign = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
 let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
 let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+
+"autocmd! BufWritePost,BufEnter * Neomake
+
+"augroup astyle
+"  autocmd!
+"  autocmd BufWritePre * Neoformat
+"augroup END
 
 "----------------------------------------------
 " Plugin: scrooloose/nerdtree
@@ -646,6 +688,7 @@ au FileType java set expandtab
 au FileType java set shiftwidth=2
 au FileType java set softtabstop=2
 au FileType java set tabstop=2
+
 
 "----------------------------------------------
 " Language: JavaScript
