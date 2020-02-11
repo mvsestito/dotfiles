@@ -24,7 +24,7 @@ brew "dep"
 brew "pkgconfig"
 brew "zmq"
 brew "thrift"
-brew "ctags"
+brew "universal-ctags/universal-ctags/universal-ctags", args: ['HEAD']
 brew "ack"
 cask "ngrok"
 cask "wireshark"
