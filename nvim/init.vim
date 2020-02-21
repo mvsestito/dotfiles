@@ -300,14 +300,14 @@ call deoplete#custom#var('omni', 'input_patterns', {
       \})
 
 " use omni func isntead of javacomplete2.py until async support is added
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-call deoplete#custom#option('ignore_sources', {'java': ['javacomplete2', 'around', 'member']})
-call deoplete#custom#source('omni', 'mark', '')
-call deoplete#custom#source('omni', 'rank', 9999)
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+"call deoplete#custom#option('ignore_sources', {'java': ['javacomplete2', 'around', 'member']})
+"call deoplete#custom#source('omni', 'mark', '')
+"call deoplete#custom#source('omni', 'rank', 9999)
 
 " use javacomplete2.py instead of omni complete
-"call deoplete#custom#option('ignore_sources', {'java': ['omni']})
-"call deoplete#custom#source('javacomplete2', 'mark', '')
+call deoplete#custom#option('ignore_sources', {'java': ['omni']})
+call deoplete#custom#source('javacomplete2', 'mark', '')
 
 
 "----------------------------------------------
