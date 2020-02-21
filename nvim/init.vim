@@ -121,7 +121,7 @@ if has('nvim')
     " example:
     " pip3.6 install -U neovim
     let g:python_host_prog = '/usr/local/bin/python2.7'
-    let g:python3_host_prog = '/usr/local/bin/python3'
+    let g:python3_host_prog = '/usr/local/bin/python3.7'
 endif
 
 " Enable mouse if possible
@@ -275,18 +275,41 @@ function! Multiple_cursors_after()
     let b:deoplete_disable_auto_complete = 0
 endfunction
 
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = []
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#sources.java = ['jc', 'javacomplete2', 'file', 'buffer']
+" public settings
+call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('file/include', 'matchers', ['matcher_head'])
+call deoplete#custom#option({
+      \ 'auto_complete_delay' :  100,
+      \ 'ignore_case'         :  get(g:, 'deoplete#enable_ignore_case', 1),
+      \ 'smart_case'          :  get(g:, 'deoplete#enable_smart_case', 1),
+      \ 'camel_case'          :  get(g:, 'deoplete#enable_camel_case', 1),
+      \ 'refresh_always'      :  get(g:, 'deoplete#enable_refresh_always', 1)
+      \ })
 
 "----------------------------------------------
 " Java Complete
 "----------------------------------------------
+let g:JavaComplete_SourcesPath = '.' " set source path as current directory
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'java': [
+      \           '[^. \t0-9]\.\w*',
+      \           '[^. \t0-9]\->\w*',
+      \           '[^. \t0-9]\::\w*',
+      \         ],
+      \ 'jsp':  ['[^. \t0-9]\.\w*'],
+      \})
+
+" use omni func isntead of javacomplete2.py until async support is added
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
-autocmd FileType java JCEnable
+call deoplete#custom#option('ignore_sources', {'java': ['javacomplete2', 'around', 'member']})
+call deoplete#custom#source('omni', 'mark', '')
+call deoplete#custom#source('omni', 'rank', 9999)
+
+" use javacomplete2.py instead of omni complete
+"call deoplete#custom#option('ignore_sources', {'java': ['omni']})
+"call deoplete#custom#source('javacomplete2', 'mark', '')
+
+
 "----------------------------------------------
 " Plugin: bling/vim-airline
 "----------------------------------------------
@@ -346,6 +369,8 @@ let g:ctrlp_map = ''
 " ---------------------------------------------
 "  Enable smart inserts for class imports
 nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
+" Enable class imports
+nmap <F5> <Plug>(JavaComplete-Imports-Add)
 " Add all missing imports
 nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
 " Remove unused imports
