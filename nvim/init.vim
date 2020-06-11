@@ -858,6 +858,13 @@ au FileType sql set softtabstop=2
 au FileType sql set tabstop=2
 
 "----------------------------------------------
+" Language: HQL
+"----------------------------------------------
+au BufNewFile,BufRead *.hive set filetype=sql
+au BufNewFile,BufRead *.hql set filetype=sql
+au BufNewFile,BufRead *.q set filetype=sql
+
+"----------------------------------------------
 " Language: Thrift
 "----------------------------------------------
 au FileType thrift set expandtab
