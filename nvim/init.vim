@@ -12,14 +12,11 @@ else
 endif
 
 " Dependencies
-Plug 'Shougo/neocomplcache'        " Depenency for Shougo/neosnippet
 Plug 'godlygeek/tabular'           " This must come before plasticboy/vim-markdown
 Plug 'tpope/vim-rhubarb'           " Depenency for tpope/fugitive
 
 " General plugins
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'  " Default snippets for many languages
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete package with full language server support
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'          " CtrlP is installed to support tag finding in vim-go
@@ -58,7 +55,6 @@ Plug 'chr4/nginx.vim'                          " nginx syntax highlighting
 Plug 'dag/vim-fish'                            " Fish syntax highlighting
 Plug 'digitaltoad/vim-pug'                     " Pug syntax highlighting
 Plug 'fatih/vim-go'                            " Go support
-Plug 'fishbullet/deoplete-ruby'                " Ruby auto completion
 Plug 'hashivim/vim-terraform'                  " Terraform syntax highlighting
 Plug 'kchmck/vim-coffee-script'                " CoffeeScript syntax highlighting
 Plug 'kylef/apiblueprint.vim'                  " API Blueprint syntax highlighting
@@ -70,10 +66,7 @@ Plug 'pangloss/vim-javascript'                 " JavaScript syntax highlighting
 Plug 'plasticboy/vim-markdown'                 " Markdown syntax highlighting
 Plug 'rodjek/vim-puppet'                       " Puppet syntax highlighting
 Plug 'tclh123/vim-thrift'                      " Thrift syntax highlighting
-Plug 'zchee/deoplete-go', { 'do': 'make'}      " Go auto completion
-Plug 'zchee/deoplete-jedi'                     " Go auto completion
 Plug 'derekwyatt/vim-scala' " scala syntax highlighting
-Plug 'artur-shaik/vim-javacomplete2' " Java auto completion
 
 call plug#end()
 
@@ -220,6 +213,152 @@ nnoremap <leader>h :split<cr>
 nnoremap <leader>q :close<cr>
 
 "----------------------------------------------
+" Plugin: neoclide/coc.nvim
+"----------------------------------------------
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" persist workspace folders across sessions
+set sessionoptions+=globals
+
+"----------------------------------------------
 " Plugin: MattesGroeger/vim-bookmarks
 "----------------------------------------------
 " Auto save bookmarks
@@ -257,58 +396,6 @@ function! BookmarkUnmapKeys()
 endfunction
 autocmd BufEnter * :call BookmarkMapKeys()
 autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
-
-"----------------------------------------------
-" Plugin: Shougo/deoplete.nvim
-"----------------------------------------------
-if has('nvim')
-    " Enable deoplete on startup
-    let g:deoplete#enable_at_startup = 1
-endif
-
-" Disable deoplete when in multi cursor mode
-function! Multiple_cursors_before()
-    let b:deoplete_disable_auto_complete = 1
-endfunction
-
-function! Multiple_cursors_after()
-    let b:deoplete_disable_auto_complete = 0
-endfunction
-
-" public settings
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-call deoplete#custom#source('file/include', 'matchers', ['matcher_head'])
-call deoplete#custom#option({
-      \ 'auto_complete_delay' :  100,
-      \ 'ignore_case'         :  get(g:, 'deoplete#enable_ignore_case', 1),
-      \ 'smart_case'          :  get(g:, 'deoplete#enable_smart_case', 1),
-      \ 'camel_case'          :  get(g:, 'deoplete#enable_camel_case', 1),
-      \ 'refresh_always'      :  get(g:, 'deoplete#enable_refresh_always', 1)
-      \ })
-
-"----------------------------------------------
-" Java Complete
-"----------------------------------------------
-let g:JavaComplete_SourcesPath = '.' " set source path as current directory
-call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'java': [
-      \           '[^. \t0-9]\.\w*',
-      \           '[^. \t0-9]\->\w*',
-      \           '[^. \t0-9]\::\w*',
-      \         ],
-      \ 'jsp':  ['[^. \t0-9]\.\w*'],
-      \})
-
-" use omni func isntead of javacomplete2.py until async support is added
-"autocmd FileType java setlocal omnifunc=javacomplete#Complete
-"call deoplete#custom#option('ignore_sources', {'java': ['javacomplete2', 'around', 'member']})
-"call deoplete#custom#source('omni', 'mark', '')
-"call deoplete#custom#source('omni', 'rank', 9999)
-
-" use javacomplete2.py instead of omni complete
-call deoplete#custom#option('ignore_sources', {'java': ['omni']})
-call deoplete#custom#source('javacomplete2', 'mark', '')
-
 
 "----------------------------------------------
 " Plugin: bling/vim-airline
@@ -363,18 +450,6 @@ nnoremap <silent> <c-\> :TmuxNavigatePrevious<cr>
 
 " Disable the CtrlP mapping, since we want to use FZF instead for <c-p>.
 let g:ctrlp_map = ''
-
-"----------------------------------------------
-" Plugin: artur-shail/vim-javacomplete2
-" ---------------------------------------------
-"  Enable smart inserts for class imports
-nmap <F4> <Plug>(JavaComplete-Imports-AddSmart)
-" Enable class imports
-nmap <F5> <Plug>(JavaComplete-Imports-Add)
-" Add all missing imports
-nmap <F6> <Plug>(JavaComplete-Imports-AddMissing)
-" Remove unused imports
-nmap <F7> <Plug>(JavaComplete-Imports-RemoveUnused)
 
 
 "----------------------------------------------
@@ -509,18 +584,6 @@ let g:NERDTreeChDirMode = 2
 " Set the Delve backend.
 let g:delve_backend = "native"
 
-"----------------------------------------------
-" Plugin: Shougo/neosnippet
-"----------------------------------------------
-" Disable the default snippets (needed since we do not install
-" Shougo/neosnippet-snippets).
-"
-" Below you can disable default snippets for specific languages. If you set the
-" language to _ it sets the default for all languages.
-let g:neosnippet#disable_runtime_snippets = {
-    \ 'go': 1
-\}
-
 " Keybindings
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -548,12 +611,6 @@ au FileType vimwiki set tabstop=2
 "----------------------------------------------
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_skip_key='<C-b>'
-
-"----------------------------------------------
-" Plugin: zchee/deoplete-go
-"----------------------------------------------
-" Enable completing of go pointers
-let g:deoplete#sources#go#pointer = 1
 
 "----------------------------------------------
 " Language: Golang
