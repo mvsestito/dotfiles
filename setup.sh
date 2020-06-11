@@ -11,6 +11,10 @@ fi
 echo "Starting setup..."
 source scripts/functions.sh
 
+# first switch the shell to zsh
+echo "Switching shell to zsh..."
+chsh -s /bin/zsh
+
 # install homebrew
 # check if already installed
 echo "Checking for existing Homebrew installation..."
@@ -119,6 +123,10 @@ nvim -c "PlugInstall | PlugClean | qall"
 
 #### source colorscheme
 nvim -c "source $HOME/.vim/colors/molokai.vim | qall"
+
+#### Coc Extensions
+echo "Installing coc-extensions..."
+nvim -c 'CocInstall -sync coc-json coc-python coc-java coc-go coc-metals coc-solargraph coc-tsserver | qall'
 
 echo "dotfiles setup complete!"
 
