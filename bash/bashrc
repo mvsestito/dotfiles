@@ -14,24 +14,24 @@ set autolist
 # Disable terminal audio-visual bell
 #set bell-style none
 # Store multi-line commands in a single history entry
-shopt -s cmdhist
+#shopt -s cmdhist
 # Enable extended pattern matching operators
-shopt -s extglob
+#shopt -s extglob
 # Apped history to existing files instead of overwriting
-shopt -s histappend
+#shopt -s histappend
 # Case-insensitive globbing
-shopt -s nocaseglob
+#shopt -s nocaseglob
 # Autocorrect typos in path names when using `cd`
-shopt -s cdspell
+#shopt -s cdspell
 # Enable programmable completion
-shopt -s progcomp
+#shopt -s progcomp
 
 #-------------------------------------------------------------------------------
 # Aliases
 #-------------------------------------------------------------------------------
 # neovim
 alias vim="/usr/local/bin/nvim"
-alias python="/usr/local/bin/python3"
+alias python="/usr/local/bin/python3.7"
 alias pip="/usr/local/bin/pip3"
 
 # Directory listing
@@ -42,6 +42,9 @@ alias diff='colordiff'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
+
+# ctags
+alias tag="ctags -R -f.tags ."
 
 #-------------------------------------------------------------------------------
 # Environment
