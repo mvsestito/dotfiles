@@ -20,7 +20,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " autocomplete package with full
 Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'          " CtrlP is installed to support tag finding in vim-go
-Plug 'editorconfig/editorconfig-vim'
+"Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/calendar.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -59,6 +59,7 @@ Plug 'hashivim/vim-terraform'                  " Terraform syntax highlighting
 Plug 'kchmck/vim-coffee-script'                " CoffeeScript syntax highlighting
 Plug 'kylef/apiblueprint.vim'                  " API Blueprint syntax highlighting
 Plug 'leafgarland/typescript-vim'              " TypeScript syntax highlighting
+Plug 'peitalin/vim-jsx-typescript'             " Tsx syntax highlighting
 Plug 'lifepillar/pgsql.vim'                    " PostgreSQL syntax highlighting
 Plug 'mxw/vim-jsx'                             " JSX syntax highlighting
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' } " Go auto completion
@@ -114,7 +115,7 @@ if has('nvim')
     " example:
     " pip3.6 install -U neovim
     let g:python_host_prog = '/usr/local/bin/python2.7'
-    let g:python3_host_prog = '/usr/local/bin/python3.7'
+    let g:python3_host_prog = '/usr/local/bin/python3.8'
 endif
 
 " Enable mouse if possible
@@ -836,7 +837,7 @@ au FileType proto set tabstop=2
 au FileType python set expandtab
 au FileType python set shiftwidth=4
 au FileType python set softtabstop=4
-au FileType python set tabstop=4
+au FileType python set tabstop=8
 
 "----------------------------------------------
 " Language: Ruby
@@ -883,10 +884,12 @@ au FileType toml set tabstop=2
 "----------------------------------------------
 " Language: TypeScript
 "----------------------------------------------
+" set filetypes as typescript.tsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript"
 au FileType typescript set expandtab
-au FileType typescript set shiftwidth=4
-au FileType typescript set softtabstop=4
-au FileType typescript set tabstop=4
+au FileType typescript set shiftwidth=2
+au FileType typescript set softtabstop=2
+au FileType typescript set tabstop=2
 
 "----------------------------------------------
 " Language: Vader
