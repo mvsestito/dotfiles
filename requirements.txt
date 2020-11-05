@@ -20,3 +20,5 @@ zope.interface>=4.4.3
 requests
 virtualenv
 pynvim
+autopep8
+pipenv

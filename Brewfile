@@ -19,6 +19,7 @@ brew "postgresql"
 brew "tmux"
 brew "tree"
 brew "wget"
+brew "pyenv"
 brew "wireshark", link: false
 brew "youtube-dl"
 brew "dep"
