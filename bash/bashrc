@@ -100,5 +100,3 @@ then
     echo "WARNING: ssh agent isnt running"
     #eval "$(ssh-agent -s)"
 fi
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
