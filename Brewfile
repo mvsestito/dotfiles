@@ -25,7 +25,6 @@ brew "youtube-dl"
 brew "dep"
 brew "pkgconfig"
 brew "zmq"
-brew "thrift"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ['HEAD']
 brew "ack"
 cask "ngrok"
