@@ -115,7 +115,7 @@ if has('nvim')
     " example:
     " pip3.6 install -U neovim
     let g:python_host_prog = '/usr/local/bin/python2.7'
-    let g:python3_host_prog = '/usr/local/bin/python3.8'
+    let g:python3_host_prog = '/usr/local/bin/python3.9'
 endif
 
 " Enable mouse if possible
