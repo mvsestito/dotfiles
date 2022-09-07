@@ -21,7 +21,7 @@ echo "Checking for existing Homebrew installation..."
 which brew &> /dev/null
 if [[ 0"$?" != 0"0" ]]; then
     echo "Installing Homebrew..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     exit_on_error "could not install homebrew"
 else
     echo "Existing Homebrew found"
@@ -49,19 +49,21 @@ ln -sf $HOME/bin/bash/bash_profile $HOME/.bash_profile
 echo "Linking ctags files..."
 # create directory if not exists
 mkdir -p $HOME/.ctags.d
-for f in $HOME/bin/ctags/* do
-	OUT_PATH="$HOME/.ctags.d/$(echo $f | cut -d'/' -f6)"
-	echo "linking $f to $OUT_PATH"
+for f in $HOME/bin/ctags/*
+do
+  OUT_PATH="$HOME/.ctags.d/$(echo $f | cut -d'/' -f6)"
+  echo "linking $f to $OUT_PATH"
 
-	ln -sf $f $OUT_PATH
+  ln -sf $f $OUT_PATH
 done
 
 ### ssh config
 echo "Configuring ssh dotfiles..."
 # [ operator is a conditional test. shorthand for "test" keyword cmd
 # check for existing sym link and rm it if exist
-[ -L $HOME/.ssh/config ] && rm $HOME/.ssh/config
-[ -f $HOME/.ssh/config ] && echo "$HOME/.ssh/config exists. Delete and re-run setup." && exit
+[ -e $HOME/.ssh/config ] && rm -i $HOME/.ssh/config
+# check if still exists bc user said no to auto delete
+[ -e $HOME/.ssh/config ] && echo "$HOME/.ssh/config exists. Delete and re-run setup." && exit
 mkdir -p $HOME/.ssh
 ln $HOME/bin/ssh/config $HOME/.ssh/config
 chmod 700 $HOME/.ssh
@@ -84,16 +86,17 @@ ln -sf $HOME/bin/git/gitconfig $HOME/.gitconfig
 
 #### vim config
 echo "Configuring vim dotfiles..."
-# check for existing sym link and rm it if exist
-[ -L $HOME/.vim ] && rm $HOME/.vim
-# check if real dir
+# check for existing sym link or dir and rm it if exist
+[ -e $HOME/.vim ] && rm -ri $HOME/.vim/
+# check if still exists bc user said no to auto delete
 [ -d $HOME/.vim ] && echo "$HOME/.vim exists. Delete and re-run setup." && exit
-[ -L $HOME/.local/share/nvim/site/autoload ] && rm $HOME/.local/share/nvim/site/autoload
+[ -e $HOME/.local/share/nvim/site/autoload ] && rm -ri $HOME/.local/share/nvim/site/autoload/
 [ -d $HOME/.local/share/nvim/site/autoload ] && echo "$HOME/.local/share/nvim/site/autoload exists. Delete and re-run setup." && exit
-[ -L $HOME/.config/nvim/init.vim ] && rm $HOME/.config/nvim/init.vim
+[ -e $HOME/.config/nvim/init.vim ] && rm -i $HOME/.config/nvim/init.vim
 # check if real file
-[ -f $HOME/.config/nvim/init.vim ] && echo "$HOME/.config/nvim/init.vim exists. Delete and re-run setup." && exit
+[ -e $HOME/.config/nvim/init.vim ] && echo "$HOME/.config/nvim/init.vim exists. Delete and re-run setup." && exit
 # check for plugged dir
+[ -e $HOME/.config/nvim/plugged ] && rm -ri $HOME/.config/nvim/plugged
 [ -d $HOME/.config/nvim/plugged ] && echo "$HOME/.config/nvim/plugged exists. Delete and re-run setup." && exit
 
 mkdir -p $HOME/.vim/autoload
@@ -113,9 +116,6 @@ ln -sf $HOME/.vim/.vimrc $HOME/.config/nvim/init.vim
 #### install pip packages
 echo "Installing pip packages..."
 pip3 install -r requirements.txt
-
-# need to install neovim for python2.7 for ctags
-pip2 install neovim
 
 #### Install all vim plugins
 echo "Installing vim plugins..."
