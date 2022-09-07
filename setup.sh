@@ -128,5 +128,6 @@ nvim -c "source $HOME/.vim/colors/molokai.vim | qall"
 echo "Installing coc-extensions..."
 nvim -c 'CocInstall -sync coc-json coc-python coc-java coc-go coc-metals coc-solargraph coc-tsserver | qall'
 
+echo "Remember to source the symlinked bash_profile in your .zprofile\n"
 echo "dotfiles setup complete!"
 
