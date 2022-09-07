@@ -21,7 +21,7 @@ brew "pyenv"
 brew "dep"
 brew "pkgconfig"
 brew "zmq"
-brew "universal-ctags/universal-ctags/universal-ctags", args: ['HEAD']
+brew "ctags"
 brew "ack"
 brew "rsync"
 cask "ngrok"
