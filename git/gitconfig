@@ -21,7 +21,12 @@
     autosetupmerge = true
     autosetuprebase = always
 [push]
-    default = simple
+	default = current
 [url "git@github.com:mvsestito"]
     insteadof = https://github.com/mvsestito
 
+[rerere]
+	enabled = true
+[core]
+	precomposeunicode = true
+	excludesfile = /Users/michael_sestito/.gitignore_global

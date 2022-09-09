@@ -4,6 +4,7 @@
 --exclude=node_modules/*
 --exclude=db/*
 --exclude=*.sql
+--exclude=*.kt
 --exclude=target
 --exclude=.svn
 --exclude=.hg
@@ -22,7 +23,14 @@
 --exclude=*.md
 --exclude=*.scss
 --exclude=*.xml
+--exclude=*.gradle
+--exclude=*.stg
+--exclude=*.proto
+--exclude=*.csv
+--exclude=*.bazel
 --exclude=*.properties
 --exclude=*.dtd
 --exclude=*.conf
 --exclude=*.yml
+--exclude=*.thrift
+--exclude=searchindex.js
