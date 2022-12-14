@@ -5,11 +5,13 @@ mvsestito's Dotfiles
 \> macOS 10.13
 
 ## Prereqs
+* [zsh](https://zsh.sourceforge.io/) v5.0+
+* OR
 * [bash](https://www.gnu.org/software/bash/) v4.0+
-* Homebrew will automatically be installed (if not already)
 
-## FYI
+## Notes
 * [neovim](https://neovim.io) is installed and used by default
+* Homebrew will automatically be installed (if not already)
 
 ## Installation
 ```bash
