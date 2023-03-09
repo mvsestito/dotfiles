@@ -1,0 +1,111 @@
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+#.bashrc
+
+#-------------------------------------------------------------------------------
+# PATH
+#-------------------------------------------------------------------------------
+export PATH=/usr/local/bin:/opt/homebrew/bin/:$PATH
+#export PATH=/opt/local/bin:/opt/local/sbin:/opt/local/libexec/gnubin:$PATH
+
+#-------------------------------------------------------------------------------
+# Shell options
+#-------------------------------------------------------------------------------
+# Enable autocomplete
+set autolist
+# Disable terminal audio-visual bell
+#set bell-style none
+# Store multi-line commands in a single history entry
+#shopt -s cmdhist
+# Enable extended pattern matching operators
+#shopt -s extglob
+# Apped history to existing files instead of overwriting
+#shopt -s histappend
+# Case-insensitive globbing
+#shopt -s nocaseglob
+# Autocorrect typos in path names when using `cd`
+#shopt -s cdspell
+# Enable programmable completion
+#shopt -s progcomp
+
+#-------------------------------------------------------------------------------
+# Aliases
+#-------------------------------------------------------------------------------
+# neovim
+alias vim="/usr/local/bin/nvim"
+alias python="/usr/local/bin/python3"
+alias pip="/usr/local/bin/pip3"
+
+# python
+alias autopep='autopep8 --recursive --in-place --aggressive --max-line-length=100 --experimental'
+
+# Directory listing
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+# Colorize
+alias diff='colordiff'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# ctags
+alias tag="ctags -R -f.tags ."
+
+# rsync
+alias rsync="/usr/local/bin/rsync --info=progress2"
+
+#-------------------------------------------------------------------------------
+# Environment
+#-------------------------------------------------------------------------------
+# Golang
+export GOPATH="$HOME/go"
+export PATH=$PATH:/opt/homebrew/bin/:/usr/local/go/bin:$GOPATH/bin:/usr/local/sbin:/usr/local/bin
+
+# git
+export GIT_TERMINAL_PROMPT=1
+
+# History
+# Ignore duplicate entries or entries starting with spaces in history
+export HISTCONTROL=ignoreboth
+export HISTSIZE=100000
+export HISTFILESIZE="${HISTSIZE}"
+export HISTIGNORE='&:ls:exit'
+
+# general
+export EMAIL='mvsestito@gmail.com>'
+export EDITOR=vim
+export VISUAL=vim
+export GIT_EDITOR=vim
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+# Programming and development
+# Highlight section titles in man pages
+export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
+# Don't clear the screen after quitting a man page
+export MANPAGER='less -X'
+
+#-------------------------------------------------------------------------------
+# FUNCTIONS
+#-------------------------------------------------------------------------------
+source $HOME/bin/scripts/functions.sh
+
+# Determine what (Bourne compatible) shell we are running under. Put the result
+# in $PROFILE_SHELL (not $SHELL) so further code can depend on the shell type.
+if test -n "$ZSH_VERSION"; then
+  PROFILE_SHELL=zsh
+elif test -n "$BASH_VERSION"; then
+  PROFILE_SHELL=bash
+elif test -n "$KSH_VERSION"; then
+  PROFILE_SHELL=ksh
+else
+  PROFILE_SHELL=sh
+fi
+
+# source fzf - cli fuzzy finder for VIM
+if [ $PROFILE_SHELL = "zsh" ]; then
+	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+elif [ $PROFILE_SHELL = "bash" ]; then
+	[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+fi
+

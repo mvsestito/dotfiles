@@ -42,6 +42,7 @@ echo "Brew packages successfully installed"
 #### bash config
 echo "Configuring bash dotfiles..."
 ln -sf $HOME/bin/bash/bashrc $HOME/.bashrc
+ln -sf $HOME/bin/zsh/zshrc $HOME/.zshrc
 ln -sf $HOME/bin/bash/bash_profile $HOME/.bash_profile
 
 ## create ctags file
