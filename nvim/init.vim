@@ -811,6 +811,11 @@ au FileType sh set shiftwidth=2
 au FileType sh set softtabstop=2
 au FileType sh set tabstop=2
 
+au FileType zsh set noexpandtab
+au FileType zsh set shiftwidth=2
+au FileType zsh set softtabstop=2
+au FileType zsh set tabstop=2
+
 "----------------------------------------------
 " Language: CSS
 "----------------------------------------------
