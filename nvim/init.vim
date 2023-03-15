@@ -41,6 +41,7 @@ Plug 'tomasr/molokai'
 Plug 'craigemery/vim-autotag'
 Plug 'universal-ctags/ctags'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'pappasam/coc-jedi', { 'do': 'yarn install --frozen-lockfile && yarn build', 'branch': 'main' }
 Plug 'scalameta/nvim-metals', {'branch': 'main'}
 " Vim only plugins
 if !has('nvim')
