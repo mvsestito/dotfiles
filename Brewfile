@@ -20,8 +20,6 @@ brew "wget"
 brew "pyenv"
 brew "dep"
 brew "pkgconfig"
-brew "zmq"
-brew "universal-ctags/universal-ctags/universal-ctags", args: ['HEAD']
 brew "ack"
 brew "rsync"
 brew "httpie"

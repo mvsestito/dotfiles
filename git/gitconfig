@@ -29,4 +29,4 @@
 	enabled = true
 [core]
 	precomposeunicode = true
-	excludesfile = /Users/michael_sestito/.gitignore_global
+	excludesfile = /Users/michaelsestito/.gitignore_global
